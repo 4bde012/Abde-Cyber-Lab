@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050805">
+  <meta name="theme-color" content="#030603">
   <meta name="description" content="ABDE CYBER LAB: programación, ciberseguridad ética y herramientas digitales.">
-  <title>ABDE CYBER LAB | Code. Secure. Create.</title>
+  <title>ABDE CYBER LAB | Cyber Terminal</title>
 
   <style>
     :root {
       --green: #39ff14;
-      --green-dark: #0c5c18;
-      --black: #050805;
-      --panel: #0b120c;
-      --text: #e0ffe2;
-      --muted: #91aa94;
+      --green2: #a0ff8a;
+      --bg: #030603;
+      --panel: #091109;
+      --border: #194a1d;
+      --muted: #8ba58d;
     }
 
     * {
@@ -24,21 +24,28 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
-      color: var(--text);
+      background: var(--bg);
+      color: #e7ffe7;
       font-family: Consolas, "Courier New", monospace;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(#39ff1408 1px, transparent 1px),
+        linear-gradient(90deg, #39ff1408 1px, transparent 1px);
+      background-size: 32px 32px;
     }
+
+    a { color: inherit; text-decoration: none; }
 
     .container {
       width: min(1100px, 90%);
@@ -46,222 +53,268 @@
     }
 
     header {
-      border-bottom: 1px solid #17391b;
-      background: #050805ee;
       position: sticky;
       top: 0;
       z-index: 10;
-      backdrop-filter: blur(10px);
+      background: #030603ed;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
 
     nav {
       min-height: 72px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
       padding: 14px 0;
     }
 
     .logo {
       color: var(--green);
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: bold;
-      letter-spacing: 1px;
+      text-shadow: 0 0 12px #39ff1455;
     }
 
-    .nav-links {
+    .links {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
-      font-size: 0.85rem;
+      font-size: .85rem;
     }
 
-    .nav-links a:hover {
-      color: var(--green);
-    }
+    .links a:hover { color: var(--green); }
 
     .hero {
-      min-height: 590px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 90px 0;
-      background-image:
-        linear-gradient(#39ff1409 1px, transparent 1px),
-        linear-gradient(90deg, #39ff1409 1px, transparent 1px);
-      background-size: 35px 35px;
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 45px;
+      padding-top: 70px;
+      padding-bottom: 70px;
     }
 
-    .tag {
+    .status {
+      display: inline-block;
       color: var(--green);
-      border: 1px solid var(--green-dark);
+      border: 1px solid var(--border);
+      background: #091109;
       padding: 6px 12px;
-      font-size: 0.8rem;
-      margin-bottom: 25px;
+      font-size: .78rem;
+      margin-bottom: 24px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      margin-right: 8px;
     }
 
     h1 {
       color: var(--green);
-      font-size: clamp(2.4rem, 8vw, 5rem);
-      line-height: 1.1;
-      text-shadow: 0 0 22px #39ff1438;
-      overflow-wrap: anywhere;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      text-shadow: 0 0 25px #39ff142b;
     }
 
-    .hero p {
-      color: var(--muted);
-      max-width: 620px;
-      margin: 24px 0;
+    .subtitle {
+      color: var(--green2);
+      margin-top: 14px;
       font-size: 1.05rem;
+    }
+
+    .description {
+      color: var(--muted);
+      max-width: 560px;
+      margin: 20px 0 28px;
     }
 
     .buttons {
       display: flex;
-      gap: 14px;
+      gap: 13px;
       flex-wrap: wrap;
     }
 
-    .button {
+    .btn {
       display: inline-block;
-      padding: 12px 20px;
+      padding: 12px 18px;
       border: 1px solid var(--green);
       color: var(--green);
       font-weight: bold;
-      transition: 0.2s;
+      transition: .2s;
     }
 
-    .button.primary {
+    .btn.primary {
       background: var(--green);
-      color: #041004;
+      color: #031003;
     }
 
-    .button:hover {
-      box-shadow: 0 0 18px #39ff1455;
-      transform: translateY(-2px);
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px #39ff143b;
     }
 
-    section {
-      padding: 75px 0;
-      scroll-margin-top: 85px;
+    .terminal {
+      background: #030703;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 35px #39ff140c;
+      min-width: 0;
     }
 
-    .section-title {
+    .terminal-head {
+      padding: 12px 15px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: .8rem;
+    }
+
+    .lights { color: var(--green); }
+
+    .terminal-body {
+      padding: 22px;
+      min-height: 245px;
+      overflow-wrap: anywhere;
+    }
+
+    .line { margin-bottom: 9px; }
+    .green { color: var(--green); }
+    .muted { color: var(--muted); }
+
+    #terminal-output {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .prompt {
+      display: flex;
+      gap: 9px;
+      margin-top: 18px;
+      border-top: 1px solid #17351a;
+      padding-top: 13px;
+    }
+
+    .prompt label { color: var(--green); }
+
+    #command {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: white;
+      font: inherit;
+    }
+
+    section { padding: 78px 0; scroll-margin-top: 85px; }
+
+    .eyebrow {
       color: var(--green);
-      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      font-size: .8rem;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      color: var(--green);
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
       margin-bottom: 12px;
     }
 
-    .section-intro {
+    .intro {
+      max-width: 700px;
       color: var(--muted);
       margin-bottom: 30px;
-      max-width: 680px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
     .card {
-      background: var(--panel);
-      border: 1px solid #193c1e;
-      padding: 25px;
-      transition: 0.2s;
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #0b150b, #050905);
+      padding: 24px;
+      transition: .2s;
     }
 
     .card:hover {
       border-color: var(--green);
-      transform: translateY(-4px);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px #39ff140b;
     }
 
-    .card .symbol {
+    .icon {
       color: var(--green);
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       margin-bottom: 12px;
     }
 
-    .card h3 {
+    .card h3 { margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: .92rem; }
+
+    .card a {
+      display: inline-block;
+      margin-top: 18px;
       color: var(--green);
-      margin-bottom: 10px;
+      font-size: .85rem;
     }
 
-    .card p {
-      color: var(--muted);
-      font-size: 0.92rem;
+    .mission {
+      border: 1px solid var(--border);
+      background: #081008;
+      padding: 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .terminal {
-      border: 1px solid var(--green-dark);
-      background: #020502;
-      padding: 22px;
-      overflow-wrap: anywhere;
-      box-shadow: 0 0 25px #39ff140b;
-    }
+    .mission p { color: var(--muted); }
 
-    .terminal-top {
-      color: var(--muted);
-      border-bottom: 1px solid #17391b;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
-    }
-
-    .terminal p {
-      margin: 8px 0;
-    }
-
-    .green {
+    .badge {
       color: var(--green);
-    }
-
-    .cursor {
-      animation: blink 1s steps(2, start) infinite;
-    }
-
-    @keyframes blink {
-      to { visibility: hidden; }
-    }
-
-    .notice {
-      border-left: 3px solid var(--green);
-      padding: 15px 18px;
-      background: #0b120c;
-      color: var(--muted);
-      margin-top: 24px;
+      border: 1px solid var(--border);
+      padding: 5px 9px;
+      font-size: .75rem;
     }
 
     footer {
-      border-top: 1px solid #17391b;
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
       text-align: center;
-      padding: 28px 0;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: .85rem;
     }
 
-    footer span {
-      color: var(--green);
-    }
+    footer strong { color: var(--green); }
 
-    @media (max-width: 600px) {
-      nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
+    @media (max-width: 800px) {
       .hero {
-        min-height: 500px;
-        padding: 65px 0;
+        grid-template-columns: 1fr;
+        gap: 35px;
+        min-height: auto;
       }
 
-      section {
-        padding: 55px 0;
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
       }
     }
   </style>
@@ -271,134 +324,108 @@
   <header>
     <nav class="container">
       <a class="logo" href="#inicio">[ ABDE CYBER LAB ]</a>
-
-      <div class="nav-links">
+      <div class="links">
         <a href="#inicio">Inicio</a>
         <a href="#proyectos">Proyectos</a>
-        <a href="#aprendizaje">Aprendizaje</a>
-        <a href="#sobre">Sobre el lab</a>
+        <a href="#laboratorio">Laboratorio</a>
+        <a href="#sobre">Sobre mí</a>
       </div>
     </nav>
   </header>
 
   <main>
     <section class="hero container" id="inicio">
-      <div class="tag">● SISTEMA INICIADO · VERSIÓN 1.0</div>
+      <div>
+        <div class="status"><span class="dot"></span>LABORATORIO EN LÍNEA</div>
+        <h1>ABDE<br>CYBER LAB</h1>
+        <p class="subtitle">CODE. SECURE. CREATE.</p>
+        <p class="description">
+          Programación, ciberseguridad ética y creatividad digital.
+          Un proyecto para aprender nuevas tecnologías y crear
+          herramientas propias paso a paso.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="#proyectos">EXPLORAR PROYECTOS</a>
+          <a class="btn" href="#laboratorio">ABRIR TERMINAL</a>
+        </div>
+      </div>
 
-      <h1>ABDE<br>CYBER LAB</h1>
-
-      <p>
-        Un espacio para aprender programación, explorar la
-        ciberseguridad ética y construir herramientas digitales.
-        Aprende, experimenta y crea tus propios proyectos.
-      </p>
-
-      <div class="buttons">
-        <a class="button primary" href="#proyectos">VER PROYECTOS &gt;</a>
-        <a class="button" href="#aprendizaje">EXPLORAR LAB</a>
+      <div class="terminal" id="laboratorio">
+        <div class="terminal-head">
+          <span>abde@cyber-lab:~</span>
+          <span class="lights">● ● ●</span>
+        </div>
+        <div class="terminal-body">
+          <p class="line green">Sistema de aprendizaje ABDE</p>
+          <p class="line muted">Escribe "help" para ver los comandos.</p>
+          <div id="terminal-output" aria-live="polite"></div>
+          <form class="prompt" id="terminal-form">
+            <label for="command">lab &gt;</label>
+            <input id="command" type="text" placeholder="Escribe help..." autocomplete="off" maxlength="80">
+          </form>
+        </div>
       </div>
     </section>
 
     <section id="proyectos">
       <div class="container">
-        <h2 class="section-title">// MIS PROYECTOS</h2>
-        <p class="section-intro">
-          Herramientas y proyectos que irán creciendo a medida
-          que aprenda nuevas habilidades.
+        <p class="eyebrow">// ARCHIVO DE PROYECTOS</p>
+        <h2>Construyendo el futuro</h2>
+        <p class="intro">
+          Cada proyecto es una oportunidad para aprender,
+          experimentar y convertir ideas en herramientas digitales.
         </p>
 
         <div class="grid">
           <article class="card">
-            <div class="symbol">&gt;_</div>
+            <div class="icon">&gt;_</div>
             <h3>ABDE CYBER TOOLS</h3>
             <p>
-              Herramientas educativas programadas en Python
-              para practicar y aprender conceptos tecnológicos.
+              Colección educativa de utilidades en Python.
+              El proyecto seguirá creciendo con nuevas funciones.
             </p>
+            <a href="#laboratorio">[ EXPLORAR ]</a>
           </article>
 
           <article class="card">
-            <div class="symbol">{ }</div>
-            <h3>PROGRAMACIÓN</h3>
+            <div class="icon">{ }</div>
+            <h3>CODE LAB</h3>
             <p>
-              Experimentos con Python, HTML, CSS y JavaScript
-              para construir aplicaciones y páginas web.
+              Prácticas de Python, HTML, CSS y JavaScript para
+              crear programas y experiencias web.
             </p>
+            <a href="#laboratorio">[ EXPLORAR ]</a>
           </article>
 
           <article class="card">
-            <div class="symbol">[+]</div>
-            <h3>PROYECTOS FUTUROS</h3>
+            <div class="icon">[+]</div>
+            <h3>PRÓXIMAMENTE</h3>
             <p>
-              Nuevas ideas, utilidades digitales y experimentos
-              que se añadirán al laboratorio.
+              Nuevas herramientas, experimentos y proyectos
+              tecnológicos en desarrollo.
             </p>
+            <a href="#sobre">[ MÁS INFORMACIÓN ]</a>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="aprendizaje">
-      <div class="container">
-        <h2 class="section-title">// ZONA DE APRENDIZAJE</h2>
-        <p class="section-intro">
-          Mejorar las habilidades digitales con práctica,
-          curiosidad y responsabilidad.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <div class="symbol">01</div>
-            <h3>Código</h3>
-            <p>
-              Aprender a escribir, comprender y corregir programas.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="symbol">02</div>
-            <h3>Ciberseguridad ética</h3>
-            <p>
-              Comprender amenazas y defensas en laboratorios propios
-              o en sistemas donde tengamos autorización.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="symbol">03</div>
-            <h3>Creatividad digital</h3>
-            <p>
-              Transformar ideas en webs, aplicaciones y herramientas
-              útiles para otras personas.
-            </p>
-          </article>
-        </div>
-
-        <div class="notice">
-          <span class="green">[ USO RESPONSABLE ]</span><br>
-          Todo aprendizaje de ciberseguridad debe respetar la
-          privacidad y realizarse en entornos autorizados.
         </div>
       </div>
     </section>
 
     <section id="sobre">
       <div class="container">
-        <h2 class="section-title">// TERMINAL DEL LABORATORIO</h2>
-        <p class="section-intro">
-          Nuestra misión: aprender haciendo.
+        <p class="eyebrow">// NUESTRA FILOSOFÍA</p>
+        <h2>Aprender. Crear. Mejorar.</h2>
+        <p class="intro">
+          ABDE CYBER LAB es un proyecto educativo independiente
+          centrado en desarrollar habilidades digitales mediante
+          la práctica, la curiosidad y el uso responsable de la tecnología.
         </p>
 
-        <div class="terminal">
-          <div class="terminal-top">
-            ABDE-LAB — TERMINAL INFORMATIVA
+        <div class="mission">
+          <div>
+            <h3 class="green">Misión activa: aprender de forma segura</h3>
+            <p>Experimenta en tus propios equipos y en entornos autorizados.</p>
           </div>
-          <p><span class="green">abde@cyber-lab:~$</span> iniciar_mision</p>
-          <p>&gt; Cargando conocimientos...</p>
-          <p>&gt; Preparando nuevos proyectos...</p>
-          <p class="green">&gt; Estado: LISTO PARA APRENDER</p>
-          <p><span class="green">abde@cyber-lab:~$</span>
-            <span class="cursor">█</span></p>
+          <span class="badge">ÉTICA DIGITAL</span>
         </div>
       </div>
     </section>
@@ -406,9 +433,56 @@
 
   <footer>
     <div class="container">
-      <p><span>ABDE CYBER LAB</span> · CODE. SECURE. CREATE.</p>
+      <p><strong>ABDE CYBER LAB</strong> · CODE. SECURE. CREATE.</p>
       <p>Proyecto educativo independiente · 2026</p>
     </div>
   </footer>
+
+  <script>
+    "use strict";
+
+    const form = document.getElementById("terminal-form");
+    const input = document.getElementById("command");
+    const output = document.getElementById("terminal-output");
+
+    function writeLine(text, className = "muted") {
+      const line = document.createElement("p");
+      line.className = "line " + className;
+      line.textContent = text;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const command = input.value.trim().toLowerCase();
+      if (!command) return;
+
+      writeLine("lab > " + command, "green");
+
+      switch (command) {
+        case "help":
+          writeLine("Comandos disponibles: help, about, projects, skills, clear");
+          break;
+        case "about":
+          writeLine("ABDE CYBER LAB: programación y ciberseguridad ética.");
+          break;
+        case "projects":
+          writeLine("Proyectos: ABDE CYBER TOOLS, CODE LAB y nuevos experimentos.");
+          break;
+        case "skills":
+          writeLine("Ruta de aprendizaje: Python, desarrollo web y seguridad defensiva.");
+          break;
+        case "clear":
+          output.replaceChildren();
+          break;
+        default:
+          writeLine('Comando desconocido. Escribe "help" para ver las opciones.');
+      }
+
+      input.value = "";
+    });
+  </script>
 </body>
 </html>
