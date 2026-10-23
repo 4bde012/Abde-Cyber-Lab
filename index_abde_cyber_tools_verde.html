@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABDE CYBER TOOLS WEB</title>
+<style>
+:root {
+  --bg:#050b10; --panel:#0b171b; --panel2:#102522;
+  --green:#39ff9c; --green2:#00d979; --blue:#65d9ff; --red:#ff657a;
+  --orange:#ffc45c; --text:#eafff4; --muted:#8eafa2;
+  --line:rgba(57,255,156,.22);
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0; color:var(--text); font-family:Arial,sans-serif;
+  background:radial-gradient(ellipse at 15% 0%,rgba(0,255,128,.09),transparent 35%),
+             radial-gradient(ellipse at 90% 25%,rgba(0,220,150,.05),transparent 32%),var(--bg);
+}
+header {
+  position:relative; overflow:hidden; padding:24px 28px;
+  border-bottom:1px solid var(--line); background:rgba(6,18,19,.96);
+  box-shadow:0 5px 28px rgba(0,255,128,.06);
+}
+header:after { content:""; position:absolute; left:0; bottom:0; height:2px; width:100%;
+  background:linear-gradient(90deg,transparent,var(--green),#00b8ff,transparent); opacity:.85; }
+header h1 { margin:0; color:var(--green); letter-spacing:2px; text-shadow:0 0 18px rgba(57,255,156,.35); }
+header p { color:var(--muted); margin-bottom:0; }
+.layout { display:flex; min-height:calc(100vh - 95px); }
+nav {
+  width:235px; flex-shrink:0; padding:18px 14px;
+  background:rgba(5,17,18,.96); border-right:1px solid var(--line);
+}
+nav button,.action {
+  width:100%; padding:13px; margin:5px 0; background:#0d211e;
+  border:1px solid rgba(57,255,156,.18); color:var(--text); text-align:left;
+  cursor:pointer; border-radius:8px; transition:all .18s ease;
+}
+nav button:hover,nav button.active {
+  color:var(--green); border-color:var(--green); background:rgba(25,90,59,.22);
+  box-shadow:inset 3px 0 var(--green),0 0 15px rgba(57,255,156,.09); text-shadow:0 0 10px rgba(57,255,156,.25);
+}
+main { flex:1; padding:27px; min-width:0; }
+h2 { margin-top:0; color:var(--green); letter-spacing:.4px; }
+h3 { color:#dffff0; }
+.muted { color:var(--muted); }
+.cards { display:grid; grid-template-columns:repeat(4,minmax(130px,1fr)); gap:13px; margin:20px 0; }
+.card,.panel {
+  background:linear-gradient(145deg,rgba(13,34,29,.98),rgba(9,22,24,.98));
+  padding:18px; border-radius:11px; border:1px solid var(--line); margin-bottom:15px;
+  box-shadow:0 7px 24px rgba(0,0,0,.16); position:relative;
+}
+.card:before { content:""; position:absolute; top:0; left:16px; right:16px; height:2px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent); opacity:.65; }
+.card strong { display:block; font-size:29px; margin-top:12px; text-shadow:0 0 14px currentColor; }
+.green { color:var(--green); }
+.blue { color:var(--blue); }
+.red { color:var(--red); }
+.orange { color:var(--orange); }
+.action {
+  display:inline-block; width:auto; text-align:center; background:var(--green); color:#03120b;
+  font-weight:bold; border:1px solid var(--green); padding:12px 16px; box-shadow:0 0 13px rgba(57,255,156,.12);
+}
+.action:hover { background:#a2ffd0; box-shadow:0 0 20px rgba(57,255,156,.3); transform:translateY(-1px); }
+input,select {
+  background:#06120f; color:var(--text); border:1px solid #28664d;
+  border-radius:7px; padding:11px; max-width:100%; outline:none;
+}
+input:focus,select:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(57,255,156,.1); }
+input[type="file"] { width:min(100%,440px); }
+textarea,pre {
+  width:100%; min-height:220px; white-space:pre-wrap; overflow-wrap:anywhere;
+  background:#030a08; color:var(--green); border:1px solid #24543f; padding:15px; border-radius:8px;
+  box-shadow:inset 0 0 22px rgba(0,255,128,.035); line-height:1.55;
+}
+table { width:100%; border-collapse:collapse; font-size:14px; }
+th,td { text-align:left; padding:11px 10px; border-bottom:1px solid rgba(57,255,156,.12); }
+th { color:var(--green); background:rgba(57,255,156,.045); }
+tbody tr:hover { background:rgba(57,255,156,.045); }
+.table-wrap { overflow-x:auto; }
+.page { display:none; animation:fadein .22s ease; }
+.page.active { display:block; }
+.notice { color:var(--muted); font-size:13px; line-height:1.6; }
+nav .notice { padding:12px 8px; border-top:1px solid var(--line); }
+@keyframes fadein { from {opacity:0;transform:translateY(4px)} to {opacity:1;transform:translateY(0)} }
+@media(max-width:800px) {
+  .layout { display:block; }
+  nav { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:5px; border-right:0; border-bottom:1px solid var(--line); }
+  nav .notice { grid-column:1/-1; }
+  main { padding:16px; }
+  .cards { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:420px) {
+  header { padding:19px 16px; }
+  header h1 { font-size:22px; }
+  .cards { grid-template-columns:1fr; }
+  nav { grid-template-columns:1fr 1fr; padding:10px; }
+  nav button { padding:11px 8px; font-size:13px; }
+  main { padding:12px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>ABDE CYBER TOOLS <span style="color:white">WEB</span></h1>
+  <p>Centro de seguridad · Analizador de registros · Historial local</p>
+</header>
+
+<div class="layout">
+<nav>
+  <button class="active" data-page="dashboard">▦ Panel principal</button>
+  <button data-page="analysis">⌕ Analizador</button>
+  <button data-page="alerts">⚑ Centro de alertas</button>
+  <button data-page="history">▤ Historial</button>
+  <p class="notice">VERSIÓN WEB 12.0<br>Procesamiento local</p>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+  <h2>Panel principal</h2>
+  <p class="muted">Resumen de tus análisis guardados en este navegador.</p>
+  <div class="cards">
+    <div class="card">ANÁLISIS GUARDADOS<strong id="totalAnalyses" class="blue">0</strong></div>
+    <div class="card">ACCESOS CORRECTOS<strong id="totalOK" class="green">0</strong></div>
+    <div class="card">ACCESOS FALLIDOS<strong id="totalFail" class="red">0</strong></div>
+    <div class="card">ALERTAS GUARDADAS<strong id="totalAlerts" class="orange">0</strong></div>
+  </div>
+  <div class="panel">
+    <h3>Centro de seguridad</h3>
+    <p>Selecciona registros de prueba o registros propios que tengas permiso para analizar.</p>
+    <p>• 1–2 fallos por IP: nivel informativo.<br>
+       • 3–4 fallos por IP: advertencia.<br>
+       • 5 o más fallos por IP: alerta alta.</p>
+    <button class="action" onclick="showPage('analysis')">Abrir analizador</button>
+  </div>
+</section>
+
+<section id="analysis" class="page">
+  <h2>Analizador de registros</h2>
+  <p class="muted">Formato: 10:01 LOGIN_FAIL user=alex ip=192.168.1.20</p>
+  <div class="panel">
+    <label for="fileInput">Selecciona un archivo .txt o .log</label><br><br>
+    <input id="fileInput" type="file" accept=".txt,.log,text/plain">
+    <button class="action" id="analyzeBtn">Analizar registro</button>
+    <button class="action" id="exportBtn">Exportar informe</button>
+    <p id="fileStatus" class="notice">Ningún archivo seleccionado.</p>
+  </div>
+  <pre id="report">Aquí aparecerán los resultados del análisis.</pre>
+</section>
+
+<section id="alerts" class="page">
+  <h2>Centro de alertas</h2>
+  <div class="panel">
+    <input id="alertSearch" placeholder="Buscar IP o archivo">
+    <select id="alertLevel">
+      <option value="Todos">Todos los niveles</option>
+      <option value="ALERTA ALTA">Alerta alta</option>
+      <option value="ADVERTENCIA">Advertencia</option>
+    </select>
+    <button class="action" id="filterAlerts">Filtrar</button>
+  </div>
+  <div class="panel table-wrap">
+    <table><thead><tr><th>Fecha</th><th>Archivo</th><th>IP</th><th>Fallos</th><th>Nivel</th></tr></thead>
+    <tbody id="alertsRows"></tbody></table>
+  </div>
+</section>
+
+<section id="history" class="page">
+  <h2>Historial</h2>
+  <div class="panel">
+    <input id="historySearch" placeholder="Buscar archivo">
+    <button class="action" id="filterHistory">Buscar</button>
+    <button class="action" id="clearHistory">Borrar historial</button>
+  </div>
+  <div class="panel table-wrap">
+    <table><thead><tr><th>Fecha</th><th>Archivo</th><th>Correctos</th><th>Fallidos</th><th>IPs</th><th>Acción</th></tr></thead>
+    <tbody id="historyRows"></tbody></table>
+  </div>
+</section>
+<p class="notice">Las alertas son orientativas. Un acceso fallido no demuestra por sí solo que exista un ataque. El historial se guarda únicamente en este navegador.</p>
+</main>
+</div>
+
+<script>
+"use strict";
+
+const MAX_BYTES = 1_000_000;
+const MAX_LINES = 10_000;
+const STORAGE_KEY = "abdeCyberToolsHistoryV12";
+let currentReport = "";
+
+function getHistory() {
+  try {
+    const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory(items) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    return true;
+  } catch {
+    alert("No se pudo guardar el historial del navegador.");
+    return false;
+  }
+}
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
+  document.querySelectorAll("nav button").forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.page === page)
+  );
+  if (page === "dashboard") updateDashboard();
+  if (page === "alerts") renderAlerts();
+  if (page === "history") renderHistory();
+}
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => showPage(btn.dataset.page));
+});
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[ch]);
+}
+
+function severity(count) {
+  if (count >= 5) return "ALERTA ALTA";
+  if (count >= 3) return "ADVERTENCIA";
+  return "INFORMATIVO";
+}
+
+document.getElementById("analyzeBtn").addEventListener("click", async () => {
+  const input = document.getElementById("fileInput");
+  const file = input.files[0];
+  const output = document.getElementById("report");
+  const status = document.getElementById("fileStatus");
+
+  if (!file) {
+    alert("Primero selecciona un archivo .txt o .log.");
+    return;
+  }
+  if (file.size > MAX_BYTES) {
+    alert("El archivo supera el límite de 1 MB.");
+    return;
+  }
+
+  const allowedName = /\.(txt|log)$/i.test(file.name);
+  if (!allowedName) {
+    alert("Selecciona un archivo .txt o .log.");
+    return;
+  }
+
+  try {
+    const content = (await file.text()).replace(/^\uFEFF/, "");
+    const lines = content.split(/\r?\n/);
+    if (lines.length > MAX_LINES) {
+      alert("El archivo supera el límite de 10.000 líneas.");
+      return;
+    }
+
+    status.textContent = `Archivo: ${file.name} · ${lines.length} líneas`;
+    const pattern = /^\s*(\d{2}:\d{2})\s+(LOGIN_OK|LOGIN_FAIL)\s+user=(\S+)\s+ip=(\S+)\s*$/i;
+    const failedByIP = {};
+    const events = [];
+    let success = 0, failed = 0, ignored = 0;
+
+    lines.forEach((line, index) => {
+      const match = line.match(pattern);
+      if (!match) {
+        if (line.trim()) ignored++;
+        return;
+      }
+      const [, time, rawEvent, user, ip] = match;
+      const event = rawEvent.toUpperCase();
+      events.push({ line: index + 1, time, event, user, ip });
+      if (event === "LOGIN_OK") success++;
+      else {
+        failed++;
+        failedByIP[ip] = (failedByIP[ip] || 0) + 1;
+      }
+    });
+
+    const ips = Object.entries(failedByIP).sort((a,b) => b[1]-a[1]);
+    const now = new Date().toLocaleString("es-ES");
+    const report = [
+      "ABDE CYBER TOOLS WEB — INFORME",
+      "=".repeat(42),
+      `Fecha: ${now}`,
+      `Archivo: ${file.name}`,
+      `Accesos correctos: ${success}`,
+      `Accesos fallidos: ${failed}`,
+      `IPs con fallos: ${ips.length}`,
+      `Líneas ignoradas: ${ignored}`,
+      "",
+      "CENTRO DE ALERTAS",
+      ...(ips.length ? ips.map(([ip,count]) => `${ip}: ${count} fallo(s) — ${severity(count)}`) : ["No se detectaron fallos de acceso."]),
+      "",
+      "EVENTOS RECONOCIDOS",
+      ...events.map(e => `[${e.line}] ${e.time} | ${e.event} | user=${e.user} | ip=${e.ip}`),
+      "",
+      "NOTA: las alertas son orientativas y requieren revisión humana."
+    ].join("\n");
+
+    currentReport = report;
+    output.textContent = report;
+
+    const history = getHistory();
+    history.unshift({
+      id: Date.now(),
+      date: now,
+      file: file.name,
+      success, failed, ignored,
+      ips: ips.length,
+      alerts: ips.filter(([,count]) => count >= 3).map(([ip,count]) => ({
+        ip, count, level: severity(count)
+      })),
+      report
+    });
+
+    if (saveHistory(history.slice(0, 100))) {
+      status.textContent += " · Análisis guardado en este navegador.";
+    }
+    updateDashboard();
+  } catch (error) {
+    console.error(error);
+    alert("No se pudo leer el archivo.");
+  }
+});
+
+document.getElementById("exportBtn").addEventListener("click", () => {
+  if (!currentReport) {
+    alert("Primero analiza un archivo o abre un informe del historial.");
+    return;
+  }
+  const blob = new Blob([currentReport], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "informe_abde_cyber.txt";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+function updateDashboard() {
+  const history = getHistory();
+  document.getElementById("totalAnalyses").textContent = history.length;
+  document.getElementById("totalOK").textContent = history.reduce((n,x) => n + x.success, 0);
+  document.getElementById("totalFail").textContent = history.reduce((n,x) => n + x.failed, 0);
+  document.getElementById("totalAlerts").textContent = history.reduce((n,x) => n + x.alerts.length, 0);
+}
+
+function renderAlerts() {
+  const term = document.getElementById("alertSearch").value.trim().toLowerCase();
+  const level = document.getElementById("alertLevel").value;
+  const rows = [];
+
+  getHistory().forEach(item => item.alerts.forEach(alert => {
+    if (level !== "Todos" && alert.level !== level) return;
+    if (term && !alert.ip.toLowerCase().includes(term) && !item.file.toLowerCase().includes(term)) return;
+    rows.push({date:item.date, file:item.file, ...alert});
+  }));
+
+  document.getElementById("alertsRows").innerHTML = rows.map(x =>
+    `<tr><td>${escapeHTML(x.date)}</td><td>${escapeHTML(x.file)}</td><td>${escapeHTML(x.ip)}</td><td>${x.count}</td><td>${escapeHTML(x.level)}</td></tr>`
+  ).join("") || '<tr><td colspan="5">No hay alertas que mostrar.</td></tr>';
+}
+
+document.getElementById("filterAlerts").addEventListener("click", renderAlerts);
+document.getElementById("alertLevel").addEventListener("change", renderAlerts);
+
+function renderHistory() {
+  const term = document.getElementById("historySearch").value.trim().toLowerCase();
+  const items = getHistory().filter(x => x.file.toLowerCase().includes(term));
+  document.getElementById("historyRows").innerHTML = items.map(x =>
+    `<tr>
+      <td>${escapeHTML(x.date)}</td><td>${escapeHTML(x.file)}</td>
+      <td>${x.success}</td><td>${x.failed}</td><td>${x.ips}</td>
+      <td><button class="action" onclick="openReport(${x.id})">Ver informe</button></td>
+    </tr>`
+  ).join("") || '<tr><td colspan="6">No hay análisis guardados.</td></tr>';
+}
+
+document.getElementById("filterHistory").addEventListener("click", renderHistory);
+document.getElementById("historySearch").addEventListener("keydown", e => {
+  if (e.key === "Enter") renderHistory();
+});
+
+function openReport(id) {
+  const item = getHistory().find(x => x.id === id);
+  if (!item) return;
+  currentReport = item.report;
+  document.getElementById("report").textContent = item.report;
+  showPage("analysis");
+}
+
+document.getElementById("clearHistory").addEventListener("click", () => {
+  if (!confirm("¿Seguro que quieres borrar todos los análisis guardados en este navegador?")) return;
+  saveHistory([]);
+  updateDashboard();
+  renderHistory();
+  renderAlerts();
+});
+
+updateDashboard();
+</script>
+</body>
+</html>
