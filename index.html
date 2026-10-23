@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050805">
+  <meta name="description" content="ABDE CYBER LAB: programación, ciberseguridad ética y herramientas digitales.">
+  <title>ABDE CYBER LAB | Code. Secure. Create.</title>
+
+  <style>
+    :root {
+      --green: #39ff14;
+      --green-dark: #0c5c18;
+      --black: #050805;
+      --panel: #0b120c;
+      --text: #e0ffe2;
+      --muted: #91aa94;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: Consolas, "Courier New", monospace;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid #17391b;
+      background: #050805ee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 14px 0;
+    }
+
+    .logo {
+      color: var(--green);
+      font-size: 1.15rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      min-height: 590px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 90px 0;
+      background-image:
+        linear-gradient(#39ff1409 1px, transparent 1px),
+        linear-gradient(90deg, #39ff1409 1px, transparent 1px);
+      background-size: 35px 35px;
+    }
+
+    .tag {
+      color: var(--green);
+      border: 1px solid var(--green-dark);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      color: var(--green);
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      line-height: 1.1;
+      text-shadow: 0 0 22px #39ff1438;
+      overflow-wrap: anywhere;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 620px;
+      margin: 24px 0;
+      font-size: 1.05rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .button.primary {
+      background: var(--green);
+      color: #041004;
+    }
+
+    .button:hover {
+      box-shadow: 0 0 18px #39ff1455;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 75px 0;
+      scroll-margin-top: 85px;
+    }
+
+    .section-title {
+      color: var(--green);
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-bottom: 30px;
+      max-width: 680px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #193c1e;
+      padding: 25px;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+    }
+
+    .card .symbol {
+      color: var(--green);
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .terminal {
+      border: 1px solid var(--green-dark);
+      background: #020502;
+      padding: 22px;
+      overflow-wrap: anywhere;
+      box-shadow: 0 0 25px #39ff140b;
+    }
+
+    .terminal-top {
+      color: var(--muted);
+      border-bottom: 1px solid #17391b;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .terminal p {
+      margin: 8px 0;
+    }
+
+    .green {
+      color: var(--green);
+    }
+
+    .cursor {
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+
+    .notice {
+      border-left: 3px solid var(--green);
+      padding: 15px 18px;
+      background: #0b120c;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+
+    footer {
+      border-top: 1px solid #17391b;
+      text-align: center;
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer span {
+      color: var(--green);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .hero {
+        min-height: 500px;
+        padding: 65px 0;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a class="logo" href="#inicio">[ ABDE CYBER LAB ]</a>
+
+      <div class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#aprendizaje">Aprendizaje</a>
+        <a href="#sobre">Sobre el lab</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="inicio">
+      <div class="tag">● SISTEMA INICIADO · VERSIÓN 1.0</div>
+
+      <h1>ABDE<br>CYBER LAB</h1>
+
+      <p>
+        Un espacio para aprender programación, explorar la
+        ciberseguridad ética y construir herramientas digitales.
+        Aprende, experimenta y crea tus propios proyectos.
+      </p>
+
+      <div class="buttons">
+        <a class="button primary" href="#proyectos">VER PROYECTOS &gt;</a>
+        <a class="button" href="#aprendizaje">EXPLORAR LAB</a>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <div class="container">
+        <h2 class="section-title">// MIS PROYECTOS</h2>
+        <p class="section-intro">
+          Herramientas y proyectos que irán creciendo a medida
+          que aprenda nuevas habilidades.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <div class="symbol">&gt;_</div>
+            <h3>ABDE CYBER TOOLS</h3>
+            <p>
+              Herramientas educativas programadas en Python
+              para practicar y aprender conceptos tecnológicos.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">{ }</div>
+            <h3>PROGRAMACIÓN</h3>
+            <p>
+              Experimentos con Python, HTML, CSS y JavaScript
+              para construir aplicaciones y páginas web.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">[+]</div>
+            <h3>PROYECTOS FUTUROS</h3>
+            <p>
+              Nuevas ideas, utilidades digitales y experimentos
+              que se añadirán al laboratorio.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="aprendizaje">
+      <div class="container">
+        <h2 class="section-title">// ZONA DE APRENDIZAJE</h2>
+        <p class="section-intro">
+          Mejorar las habilidades digitales con práctica,
+          curiosidad y responsabilidad.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <div class="symbol">01</div>
+            <h3>Código</h3>
+            <p>
+              Aprender a escribir, comprender y corregir programas.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">02</div>
+            <h3>Ciberseguridad ética</h3>
+            <p>
+              Comprender amenazas y defensas en laboratorios propios
+              o en sistemas donde tengamos autorización.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="symbol">03</div>
+            <h3>Creatividad digital</h3>
+            <p>
+              Transformar ideas en webs, aplicaciones y herramientas
+              útiles para otras personas.
+            </p>
+          </article>
+        </div>
+
+        <div class="notice">
+          <span class="green">[ USO RESPONSABLE ]</span><br>
+          Todo aprendizaje de ciberseguridad debe respetar la
+          privacidad y realizarse en entornos autorizados.
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container">
+        <h2 class="section-title">// TERMINAL DEL LABORATORIO</h2>
+        <p class="section-intro">
+          Nuestra misión: aprender haciendo.
+        </p>
+
+        <div class="terminal">
+          <div class="terminal-top">
+            ABDE-LAB — TERMINAL INFORMATIVA
+          </div>
+          <p><span class="green">abde@cyber-lab:~$</span> iniciar_mision</p>
+          <p>&gt; Cargando conocimientos...</p>
+          <p>&gt; Preparando nuevos proyectos...</p>
+          <p class="green">&gt; Estado: LISTO PARA APRENDER</p>
+          <p><span class="green">abde@cyber-lab:~$</span>
+            <span class="cursor">█</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><span>ABDE CYBER LAB</span> · CODE. SECURE. CREATE.</p>
+      <p>Proyecto educativo independiente · 2026</p>
+    </div>
+  </footer>
+</body>
+</html>
